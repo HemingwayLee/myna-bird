@@ -1,5 +1,5 @@
 from multiprocessing.pool import Pool 
-
+import multiprocessing
 from functools import partial
 from itertools import chain
 from pathlib import Path
@@ -8,6 +8,9 @@ import numpy as np
 from encoder import inference as encoder
 from synthesizer.preprocess_speaker import preprocess_speaker_general
 from synthesizer.preprocess_transcript import preprocess_transcript_aishell3, preprocess_transcript_magicdata
+
+if multiprocessing.get_start_method() == 'fork':
+    multiprocessing.set_start_method('spawn', force=True)
 
 data_info = {
     "aidatatang_200zh": {
